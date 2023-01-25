@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 const _decoration = InputDecoration(
   border: OutlineInputBorder(),
+  isDense: true,
 );
 
 class PasswordField extends StatefulWidget {
