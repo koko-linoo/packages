@@ -2,27 +2,41 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class PNetworkImage extends StatelessWidget {
-  const PNetworkImage(this.imageUrl, {super.key, this.radius = 10});
+  const PNetworkImage(
+    this.imageUrl, {
+    super.key,
+    this.radius = 0,
+    this.boxShadow = false,
+  });
 
   final String imageUrl;
   final double radius;
+  final bool boxShadow;
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      progressIndicatorBuilder: (context, url, downloadProgress) =>
-          CircularProgressIndicator(value: downloadProgress.progress),
       imageBuilder: (context, imageProvider) => Container(
+        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radius),
+          boxShadow: boxShadow
+              ? [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 2,
+                    offset: const Offset(
+                      2,
+                      2,
+                    ), // changes position of shadow
+                  ),
+                ]
+              : null,
+          borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
             image: imageProvider,
             fit: BoxFit.cover,
-            colorFilter: const ColorFilter.mode(
-              Colors.red,
-              BlendMode.colorBurn,
-            ),
           ),
         ),
       ),
