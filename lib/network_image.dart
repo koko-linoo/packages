@@ -32,7 +32,7 @@ class PNetworkImage extends StatelessWidget {
                   ),
                 ]
               : null,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(radius),
           image: DecorationImage(
             image: imageProvider,
             fit: BoxFit.cover,
