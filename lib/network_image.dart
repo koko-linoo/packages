@@ -18,7 +18,6 @@ class PNetworkImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: imageUrl,
       imageBuilder: (context, imageProvider) => Container(
-        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           boxShadow: boxShadow
               ? [
