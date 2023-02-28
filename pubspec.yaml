@@ -9,6 +9,8 @@ environment:
 
 dependencies:
   cached_network_image: ^3.2.3
+  carousel_indicator: ^1.0.6
+  carousel_slider: ^4.2.1
   flutter:
     sdk: flutter
 
