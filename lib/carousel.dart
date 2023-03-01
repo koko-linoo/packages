@@ -2,6 +2,7 @@ import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:packages/network_image.dart';
+import 'package:photo_view/photo_view.dart';
 
 class PCarousel extends StatefulWidget {
   const PCarousel({
@@ -28,7 +29,20 @@ class _PCarouselState extends State<PCarousel> {
           itemCount: widget.images.length,
           itemBuilder: (context, index, realIndex) {
             final file = widget.images[index];
-            return PNetworkImage(file);
+            return InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => PImageViewer(
+                      index: index,
+                      images: widget.images,
+                    ),
+                  ),
+                );
+              },
+              child: PNetworkImage(file),
+            );
           },
           options: CarouselOptions(
             viewportFraction: 1,
@@ -45,6 +59,34 @@ class _PCarouselState extends State<PCarousel> {
           index: current,
         ),
       ],
+    );
+  }
+}
+
+class PImageViewer extends StatelessWidget {
+  const PImageViewer({
+    super.key,
+    required this.index,
+    required this.images,
+  });
+
+  final int index;
+  final List<String> images;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: PageView.builder(
+        controller: PageController(initialPage: index),
+        itemCount: images.length,
+        itemBuilder: (context, index) => PhotoView(
+          backgroundDecoration: const BoxDecoration(color: Colors.white),
+          imageProvider: NetworkImage(
+            images[index],
+          ),
+        ),
+      ),
     );
   }
 }
